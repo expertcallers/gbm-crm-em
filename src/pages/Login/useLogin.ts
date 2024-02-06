@@ -33,7 +33,7 @@ const useLogin = () => {
 
     setLoading(true);
     try {
-      const response = await fetch(`${BASE_URL}/mapping/login`, {
+      const response = await fetch(`http://localhost:8000/api-token-auth/`, {
         method: "POST",
         body: JSON.stringify(
           !hasPolicyAccepted
