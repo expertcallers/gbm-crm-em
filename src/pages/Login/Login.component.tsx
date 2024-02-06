@@ -40,7 +40,6 @@ export default function LoginForm({
               type="text"
               autoComplete="empId"
               required
-              title="The employee ID, Eg: 9588."
               className="relative block w-full rounded border border-gray-light p-2 outline-none sm:text-sm text-black"
               placeholder="Employee ID"
             />

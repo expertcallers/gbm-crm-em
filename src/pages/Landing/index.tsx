@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import OuterLayout from "../../coremodules/OuterLayout";
+import landing from "../../assets/landing_2.png";
 
 const Landing: React.FC = () => {
   const navigate = useNavigate();
@@ -21,7 +22,9 @@ const Landing: React.FC = () => {
           </button>
         }
       ></OuterLayout>
-      <div className="mt-5"></div>
+      <div className="mt-5 flex justify-center">
+        <img src={landing} />
+      </div>
     </>
   );
 };

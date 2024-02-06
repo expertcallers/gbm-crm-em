@@ -158,7 +158,7 @@ export namespace Form {
   };
 
   export const inputStyle =
-    "relative mb-2 block w-full rounded border border-gray-light p-2 text-sm";
+    "relative mb-2 block w-full rounded border border-gray-light p-2 text-sm outline-none text-black font-normal";
 
   export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
     label?: string;
