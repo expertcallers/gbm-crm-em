@@ -62,7 +62,7 @@ const useLogin = () => {
         storage.storeToken(result.token);
       if (response.status === 200 && result?.user)
         storage.storeUser(result.user);
-      window.location.reload();
+      // window.location.reload();
       return result;
     } catch (e) {
       setError("Something went wrong, try again later.");
