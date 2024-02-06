@@ -1,10 +1,14 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-
+import modules from "../modules";
 import ErrorPage from "./Core/ErrorPage";
 import ApplicationError from "./Core/ApplicationError";
 import Landing from "./Landing";
 import Login from "./Login";
 import ForgotPassword from "./ForgotPassword";
+import Home from "./Home";
+import InnerLayout from "../coremodules/InnerLayout";
+import { Menu } from "@headlessui/react";
+
 
 const router = createBrowserRouter([
   {
@@ -26,6 +30,23 @@ const router = createBrowserRouter([
         path: "forgot-password",
         element: <ForgotPassword />,
         errorElement: <ErrorPage />,
+      },
+    ],
+  },
+  {
+    path: "/",
+    element: <Home/>,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "gbm-crm",
+        element: (
+          <InnerLayout Menu={Menu}>
+            <Outlet />
+          </InnerLayout>
+        ),
+        errorElement: <ErrorPage />,
+        children: [modules.dashboardModule, modules.agentPerformanceModule],
       },
     ],
   },

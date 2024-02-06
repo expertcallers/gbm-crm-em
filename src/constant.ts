@@ -8,3 +8,5 @@ export const BASE_URL = `${isDevelopment ? "http" : "https"}://${HOST}${
   isDevelopment ? "" : "/api"
 }`;
 export const BASE_ROUTE = "/gbm-crm";
+export const PERMISSIONS = {} as const;
+export const PREDEFINED = {};
