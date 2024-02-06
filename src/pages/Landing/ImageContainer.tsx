@@ -49,6 +49,7 @@ const ImageContainer: React.FC<Pros> = ({ className }) => {
           style={{
             maxWidth: dimensions?.width,
             maxHeight: dimensions?.height,
+            
           }}
         />
       </div>
