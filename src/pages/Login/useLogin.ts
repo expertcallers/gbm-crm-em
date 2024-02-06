@@ -20,6 +20,7 @@ const useLogin = () => {
 
   const login = async (e: React.FormEvent<HTMLFormElement>) => {
     setError("");
+    e.preventDefault();
 
     const data = new FormData(e.currentTarget);
     const empId = data.get("empId") as string | null;
