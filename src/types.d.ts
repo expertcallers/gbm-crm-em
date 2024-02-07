@@ -16,3 +16,12 @@ type EmptyResponse = {
   message?: string;
   resign_id?: any;
 };
+
+type LogoutResponse =
+    {
+        error?: ResponseError;
+      
+    }
+
+
+    type ResponseError = string | undefined | null;

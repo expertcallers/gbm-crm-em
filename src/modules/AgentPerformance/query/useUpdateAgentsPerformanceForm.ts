@@ -9,7 +9,7 @@ export const useUpdateAgentsPerformanceForm = () => {
     mutationFn: async (form) => {
       const response = await fetch(`/leads/customer`, "POST", form, true);
       const result: EmptyResponse = await response.json();
-      if (response.status !== 200) return util.handleError(result);
+      if (![200, 201].includes(response.status)) return util.handleError(result);
       return result;
     },
   });

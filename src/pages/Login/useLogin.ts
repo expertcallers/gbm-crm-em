@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { BASE_URL } from "../../constant";
+
 import useSession from "../../hooks/useSession";
 
 type LoginResponse = {

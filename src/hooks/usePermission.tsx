@@ -57,7 +57,8 @@ export const PermissionProvider: React.FC<PropsWithChildren> = ({
       const response = await fetch("/mapping/get_user_permissions");
       const result: ResponseWithError & { permissions: Permissions } =
         await response.json();
-      if (response.status !== 200) return util.handleError(result);
+      if (![200, 201].includes(response.status))
+        return util.handleError(result);
       setPermission((prev) =>
         equal(prev, result.permissions) ? prev : result.permissions
       );

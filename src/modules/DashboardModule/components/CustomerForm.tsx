@@ -4,7 +4,6 @@ import { useCustomerForm } from "../query/useCustomerForm";
 
 export default function CustomerForm(props: any) {
   const request = useCustomerForm();
-
   const onSubmit = async (formData: FormData) => {
     alert({
       title: "Create Customer",
@@ -33,11 +32,11 @@ export default function CustomerForm(props: any) {
         inputs={{
           "": [
             {
-              name: "customer",
+              name: "name",
               type: "AlphaWithSpace",
             },
             {
-              name: "phone_number",
+              name: "contact",
               type: "Number",
             },
             {
@@ -45,7 +44,7 @@ export default function CustomerForm(props: any) {
               type: "Email",
             },
             {
-              name: "company",
+              name: "company_name",
               type: "AlphaWithSpace",
             },
           ],

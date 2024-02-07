@@ -15,35 +15,20 @@ const AllLeads: React.FC = () => {
   const permissions = usePermission();
   const [query, setFilter] = useQueryBuilder();
   const request = useGetAllLeads(query);
+  const { data, isLoading, isError } = request;
 
   const editLead = useModal({ Component: EditLeadForm });
 
   const { Datatable, ...controller } = useDatatable({
-    data: request.data?.results,
+    data:request.data,
     count: request.data?.count,
     onFilter: setFilter,
-    initialSortOrder: { created_at: { orderIndex: 1, sortDirection: "desc" } },
-    columns: [
-      // {
-      //   field: "created_by_name",
-      //   columnName: "Created By",
-      //   width: 250,
-      //   renderCell: (val, col, row) => (
-      //     <EmployeeDisplayName id={row.created_by_emp_id} name={val} />
-      //   ),
-      // },
 
-      { field: "Employee" },
-      { field: "date", datatype: "date" },
-      { field: "leads_mined", datatype: "number", filterable: false },
-      { field: "Leads created (ZOHO)", datatype: "number", filterable: false },
-      { field: "Prospect created", datatype: "number", filterable: false },
-      { field: "Nomination received", datatype: "number", filterable: false },
-      { field: "Doc collected", datatype: "number", filterable: false },
-      { field: "Shortlisted", datatype: "number", filterable: false },
-      { field: "Negotation", datatype: "number", filterable: false },
-      { field: "Invoice", datatype: "number", filterable: false },
-      { field: "Sales", datatype: "number", filterable: false },
+    columns: [
+      { field: "name" },
+      { field: "contact" },
+      { field: "email" },
+      { field: "company_name" },
     ],
   });
 
@@ -57,7 +42,6 @@ const AllLeads: React.FC = () => {
             alignLeft
             borderLess
             onClick={() => editLead.show(row)}
-            // hidden={!permissions.isAllowed("AssetManagement:EditAsset")}
             theme="white"
           />
         </>

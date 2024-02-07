@@ -36,7 +36,7 @@ export const PredefinedProvider: React.FC<PropsWithChildren> = ({
           : {}
       );
       const result: GetPredefinedResponse = await response.json();
-      if (response.status !== 200) return util.handleError(result);
+      if (![200, 201].includes(response.status))return util.handleError(result);
       setState((PREDEFINED) => ({ ...PREDEFINED, ...result }));
       return result;
     },

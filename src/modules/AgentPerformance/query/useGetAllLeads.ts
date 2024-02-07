@@ -27,8 +27,8 @@ const makeRequest = async (
   fetch: ReturnType<typeof useFetch>,
   query: string
 ) => {
-  const response = await fetch(`/asset/get_all_assets?${query}`);
+  const response = await fetch(`/leads/customer?${query}`);
   const result: GetAllAssetResponse = await response.json();
-  if (response.status !== 200) return util.handleError(result);
+  if (![200, 201,304].includes(response.status))return util.handleError(result);
   return result;
 };

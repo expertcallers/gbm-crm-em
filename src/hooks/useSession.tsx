@@ -4,9 +4,7 @@ import React, {
   useContext,
   useMemo,
 } from "react";
-
 import { useQuery } from "@tanstack/react-query";
-
 import { BASE_URL } from "../constant";
 import useLocalStorage from "./useLocalStorage";
 import util from "./util";
@@ -57,7 +55,7 @@ export const SessionProvider: React.FC<PropsWithChildren> = ({ children }) => {
         headers: { Authorization: `Token ${token.storage}` },
       });
       const result: any = await response.json();
-      if (response.status !== 200) return util.handleError(result);
+      if (![200, 201].includes(response.status))return util.handleError(result);
       if (user.storage)
         user.setStorage({ ...user.storage, my_team: result.my_team });
       return result;
