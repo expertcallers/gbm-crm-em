@@ -1,5 +1,6 @@
 import { FullscreenInnerLayoutButton } from "../../../coremodules/InnerLayout";
 import CreateCustomerWidget from "../components/CreateCustomerWidget";
+import CreateLeadWidget from "../components/CreateLeadWidget";
 
 const DATE = new Date().toDateString();
 
@@ -15,11 +16,12 @@ const Dashboard: React.FC = () => {
       </div>
       <div className="flex flex-col xl:flex-row gap-4 h-full">
         <div className="flex-[2]">
-          <div className="auto-grid">
-          <CreateCustomerWidget/>
-          </div>
+        <div className="auto-grid ">
+          <CreateCustomerWidget className="widget-wrapper" />
+          <CreateLeadWidget className="widget-wrapper"/>
+        </div>
+        </div>
       </div>
-    </div>
     </div>
   );
 };

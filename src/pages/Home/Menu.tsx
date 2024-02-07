@@ -9,6 +9,7 @@ import {
 } from "react-icons/io5";
 import { MenuButton } from "../../coremodules/MenuButton";
 import usePermission, { Permission } from "../../hooks/usePermission";
+import usePredefined from "../../hooks/usePredefined";
 
 interface MenuProps {
   closeMenu?: () => void;
@@ -34,6 +35,7 @@ function Menu(props: MenuProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const permissions = usePermission();
+  const predefined = usePredefined();
 
   const menuOptions = useMemo<MenuOption[]>(
     () => [
@@ -48,6 +50,13 @@ function Menu(props: MenuProps) {
             permissions: [],
             anyOne: true,
             route: "/gbm-crm/agent-performance",
+            exact: true,
+          },
+          {
+            title: "All Leads",
+            permissions: [],
+            anyOne: true,
+            route: "/gbm-crm/agent-performance/all-leads",
             exact: true,
           },
         ],
@@ -98,7 +107,7 @@ function Menu(props: MenuProps) {
           props.closeMenu && props.closeMenu();
         }}
       />
-      <hr className="w-3/4 mx-auto text-gray-light" />
+      <hr className="w-3/4 mx-auto text-gray" />
 
       {menuOptions.map((option) => {
         const isMainMenu = group === null;
@@ -119,7 +128,7 @@ function Menu(props: MenuProps) {
         );
       })}
 
-      {!!groupOption && <hr className="w-3/4 mx-auto text-gray-light" />}
+      {!!groupOption && <hr className="w-3/4 mx-auto text-primary" />}
       {!groupOption
         ? null
         : groupOption.items.map((item) => {

@@ -1,11 +1,11 @@
-
+import CoreProvider from "../CoreProvider";
 import Router from "./router";
-
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
-    <div>
+    <CoreProvider>
       <Router />
-    </div>
+    </CoreProvider>
   );
 }
 

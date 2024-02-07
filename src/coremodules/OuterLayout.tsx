@@ -16,7 +16,11 @@ const OuterLayout: React.FC<Props> = (props) => {
   const navigate = useNavigate();
 
   return (
-    <div className={props.rootClassName ?? "flex flex-col w-full gap-1 p-1 text-white"}>
+    <div
+      className={
+        props.rootClassName ?? "flex flex-col w-full gap-1 p-1 text-white"
+      }
+    >
       <div className="md:h-16 flex items-center justify-between bg-black rounded-lg">
         {props.title || props.onBack ? (
           <div className="flex items-center m-2">

@@ -30,7 +30,7 @@ export const PredefinedProvider: React.FC<PropsWithChildren> = ({
     queryKey: ["usePredefined", session.user?.emp_id],
     queryFn: async () => {
       const response = await fetch(
-        `${BASE_URL}/mapping/get_pre_defined`,
+        ``,
         session.token
           ? { headers: { Authorization: `Token ${session.token}` } }
           : {}

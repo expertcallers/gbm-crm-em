@@ -21,10 +21,11 @@ const Landing: React.FC = () => {
             Login
           </button>
         }
-      ></OuterLayout>
-      <div className="mt-5 flex justify-center">
-        <img src={landing} />
-      </div>
+      >
+        <div className="mt-5 flex justify-center">
+          <img src={landing} />
+        </div>
+      </OuterLayout>
     </>
   );
 };

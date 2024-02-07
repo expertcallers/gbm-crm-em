@@ -7,8 +7,9 @@ import Login from "./Login";
 import ForgotPassword from "./ForgotPassword";
 import Home from "./Home";
 import InnerLayout from "../coremodules/InnerLayout";
-import { Menu } from "@headlessui/react";
-
+import Menu from "./Home/Menu";
+import AuthRoute from "../coremodules/AuthRoute";
+import UnAuthenticatedRoute from "../coremodules/UnAuthenticatedRoute";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,11 @@ const router = createBrowserRouter([
       },
       {
         path: "login",
-        element: <Login />,
+        element: (
+          <UnAuthenticatedRoute>
+            <Login />,
+          </UnAuthenticatedRoute>
+        ),
         errorElement: <ErrorPage />,
       },
       {
@@ -35,7 +40,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <Home/>,
+    element: (
+      <AuthRoute>
+        <Home />
+      </AuthRoute>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
