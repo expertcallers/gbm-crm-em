@@ -29,6 +29,7 @@
   white-space: nowrap;
   vertical-align: middle;
   font-size: 14px;
+  color:black
 }
 .myers-datatable .text-wrapper {
   overflow: hidden;
@@ -54,7 +55,7 @@
 }
 .myers-datatable .table-header-row {
   margin-block: 0px !important;
-  color: black;
+  color: black !important;
 }
 .myers-datatable .table-header-children-container {
   display: flex;
@@ -73,7 +74,7 @@
   /* border-radius: 10px; */
   box-shadow: rgb(235, 235, 235) 0px 0px 5px 0px;
   background-color: rgb(255, 255, 255);
-  color: black;
+  color:black !important;
 }
 /* .myers-datatable .table-row:nth-child(even) {
   background-color: rgb(255, 255, 255);
@@ -104,6 +105,7 @@
   color: rgb(100, 100, 100);
   min-width: 16px;
   min-height: 16px;
+  color: black;
 }
 .myers-datatable .sortable-caret {
   width: 16px;
@@ -115,6 +117,7 @@
   min-width: 40px;
   max-width: 40px;
   align-items: center;
+  color:black
 }
 .myers-datatable .boolean-svg {
   height: 24px;
@@ -139,6 +142,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: pointer;
+  color:black
 }
 .myers-datatable .cell-datatype-paragraph-closed {
   white-space: nowrap;
@@ -293,14 +297,16 @@
 }
 .myers-datatable .popup-floating-arrow {
   fill: gray;
+ 
 }
 .myers-datatable .popup-container {
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color:#27374D;
   border-radius: 8px;
-  box-shadow: 0px 0px 5px 0px lightgray;
+  box-shadow: 0px 0px 5px 0px rgb(184, 182, 182);
   overflow: hidden;
+  color:black
 }
 .myers-datatable .set-filter-container {
   display: flex;
@@ -311,6 +317,7 @@
   overflow-y: scroll;
   padding-inline: 4px;
   padding-block: 8px;
+
 }
 .myers-datatable .divider {
   height: 1px;
@@ -320,6 +327,7 @@
 .myers-datatable .set-filter-list-item-container {
   display: flex;
   gap: 8px;
+
 }
 .myers-datatable .set-filter-label {
   width: 100%;
@@ -329,6 +337,7 @@
   display: flex;
   flex-direction: column;
   min-width: 200px;
+  
 }
 .myers-datatable .omit-column-title {
   padding: 8px;
@@ -347,6 +356,7 @@
   display: flex;
   gap: 8px;
   padding-inline: 8px;
+  
 }
 .myers-datatable .omit-column-label {
   width: 100%;
@@ -355,6 +365,8 @@
 }
 .myers-datatable .filter-options-button {
   display: flex;
+
+  
 }
 .myers-datatable .operation-filter-container {
   min-width: 182px;
@@ -363,6 +375,7 @@
   flex-direction: column;
   gap: 8px;
   padding: 8px;
+ 
 }
 .myers-datatable .operation-filter-wrap {
   display: flex;
@@ -386,6 +399,7 @@
   font-weight: normal;
   text-align: center;
   transition: background-color 300ms ease-in-out;
+  
   cursor: pointer;
 }
 .myers-datatable .operation-filter-button:hover {
@@ -409,6 +423,7 @@
   position: sticky;
   left: 0;
   padding: 8px;
+  color:black
 }
 .myers-datatable .table-row-clickable {
   cursor: pointer;

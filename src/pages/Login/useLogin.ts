@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import useSession from "../../hooks/useSession";
 
 type LoginResponse = {
@@ -12,8 +11,6 @@ type LoginResponse = {
 
 const useLogin = () => {
   const navigate = useNavigate();
-  let [searchParams, setSearchParams] = useSearchParams();
-
   const { storage } = useSession();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
@@ -25,10 +22,6 @@ const useLogin = () => {
     const data = new FormData(e.currentTarget);
     const empId = data.get("empId") as string | null;
     const password = data.get("password") as string | null;
-    const hasPolicyAccepted = data.get("policy_accepted") !== null;
-    const policy_accepted = String(
-      (data.get("policy_accepted") as string | null) === "on"
-    );
 
     if (!empId || !password) return;
 
@@ -36,26 +29,17 @@ const useLogin = () => {
     try {
       const response = await fetch(`http://localhost:8000/api-token-auth/`, {
         method: "POST",
-        body: JSON.stringify(
-          !hasPolicyAccepted
-            ? { username: empId, password }
-            : { username: empId, password, policy_accepted }
-        ),
+        body: JSON.stringify({ username: empId, password }),
         headers: { "content-type": "application/json" },
       });
       const result: LoginResponse = await response.json();
-      if (response.status === 406 && result?.action === "accept_policy") {
-        setSearchParams("?policy=na");
-        setError(result.error);
-        return;
-      }
       if (response.status === 406 && result?.action === "reset_password") {
         navigate("/forgot-password", {
           state: { title: "Reset Password", empId },
         });
         return;
       }
-      if (response.status !== 200) {
+      if (![200, 201].includes(response.status)) {
         return setError(result?.error ? result.error : "Something went wrong.");
       }
       if (response.status === 200 && result?.token)

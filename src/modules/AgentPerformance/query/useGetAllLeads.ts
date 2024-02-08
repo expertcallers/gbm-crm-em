@@ -13,8 +13,8 @@ export const useGetAllLeads = (query: string) => {
       enabled: !!query,
       placeholderData: keepPreviousData,
       queryKey: [
-        "AssetManagementModule",
-        "useGetAllAssets",
+        "AgentPerformanceModule",
+        "useGetAllLeads",
         session.user?.emp_id,
         query,
       ],

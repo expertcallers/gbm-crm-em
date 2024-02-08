@@ -1,5 +1,4 @@
-import { useCallback } from "react";
-import usePredefined from "../../../hooks/usePredefined";
+import React, { useCallback } from "react";
 import usePermission from "../../../hooks/usePermission";
 import { ClearFilter, QueryExport, useQueryBuilder } from "../../../helper";
 import useModal from "../../../hooks/useModal";
@@ -7,28 +6,23 @@ import { Datatable, useDatatable } from "@jjmyers/datatable";
 import Button from "../../../coremodules/Button";
 import PageLayout from "../../../coremodules/PageLayout";
 import AutoHeight from "../../../coremodules/AutoHeight";
-import EditLeadForm from "../components/EditLeadForm";
 import { useGetAllLeads } from "../query/useGetAllLeads";
+import EditCustomerForm from "../components/EditCustomerForm";
 
-const AllLeads: React.FC = () => {
-  const predefined = usePredefined();
+const AllCustomers: React.FC = () => {
   const permissions = usePermission();
   const [query, setFilter] = useQueryBuilder();
   const request = useGetAllLeads(query);
-  const { data, isLoading, isError } = request;
-
-  const editLead = useModal({ Component: EditLeadForm });
+  const editcustomer = useModal({ Component: EditCustomerForm });
 
   const { Datatable, ...controller } = useDatatable({
-    data:request.data,
-    count: request.data?.count,
+    data: request.data ?? [],
     onFilter: setFilter,
-
     columns: [
-      { field: "name" },
-      { field: "contact" },
-      { field: "email" },
-      { field: "company_name" },
+      { field: "name", columnName: "Customer", filterable: false },
+      { field: "contact", columnName: "Phone Number", filterable: false },
+      { field: "email", columnName: "Email", filterable: false },
+      { field: "company_name", columnName: "Company", filterable: false },
     ],
   });
 
@@ -38,10 +32,10 @@ const AllLeads: React.FC = () => {
       return (
         <>
           <Button
-            text="Edit Asset"
+            text="Edit customer"
             alignLeft
             borderLess
-            onClick={() => editLead.show(row)}
+            onClick={() => editcustomer.show(row)}
             theme="white"
           />
         </>
@@ -56,9 +50,9 @@ const AllLeads: React.FC = () => {
         <>
           <ClearFilter controller={controller} />
           <QueryExport
-            fileName="All Leads"
+            fileName="All customers"
             query={query}
-            count={request.data?.count}
+            count={request.data?.length}
             fetchData={request.makeRequest}
           />
           <span className="h-[1px] w-full bg-gray-lighter" />
@@ -81,9 +75,9 @@ const AllLeads: React.FC = () => {
           {...controller}
         />
       </AutoHeight>
-      {editLead.Modal}
+      {editcustomer.Modal}
     </PageLayout>
   );
 };
 
-export default AllLeads;
+export default AllCustomers;

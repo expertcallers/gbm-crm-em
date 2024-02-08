@@ -9,7 +9,7 @@ import {
 } from "react-icons/io5";
 import { MenuButton } from "../../coremodules/MenuButton";
 import usePermission, { Permission } from "../../hooks/usePermission";
-import usePredefined from "../../hooks/usePredefined";
+
 
 interface MenuProps {
   closeMenu?: () => void;
@@ -35,7 +35,7 @@ function Menu(props: MenuProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const permissions = usePermission();
-  const predefined = usePredefined();
+ 
 
   const menuOptions = useMemo<MenuOption[]>(
     () => [
@@ -53,10 +53,10 @@ function Menu(props: MenuProps) {
             exact: true,
           },
           {
-            title: "All Leads",
+            title: "All Customers",
             permissions: [],
             anyOne: true,
-            route: "/gbm-crm/agent-performance/all-leads",
+            route: "/gbm-crm/agent-performance/all-customers",
             exact: true,
           },
         ],

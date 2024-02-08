@@ -7,17 +7,10 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { useQuery } from "@tanstack/react-query";
-import useFetch from "./useFetch";
-import useSession from "./useSession";
 import { PERMISSIONS } from "../constant";
-import util from "./util";
+
 
 export type Permission = keyof typeof PERMISSIONS;
-type ResponseWithError = {
-  error?: string | undefined | null;
-};
-
 type Permissions = string[];
 
 type PermissionType = {
@@ -27,48 +20,22 @@ type PermissionType = {
     anyOne?: boolean
   ) => boolean;
   getIfExists: (requiredPermissions: Permission | Permission[]) => Permission[];
-  refresh: () => Promise<void>;
+  refresh: () => void;
 };
 
 const PermissionContext = createContext<PermissionType>({
   isLoading: true,
   isAllowed: () => false,
-  refresh: () => Promise.reject("Permissions not initialized."),
+  refresh: () => {},
   getIfExists: () => [],
 });
 
 const usePermission = () => useContext(PermissionContext);
 
-export const PermissionProvider: React.FC<PropsWithChildren> = ({
+export const PermissionProvider: React.FC<PropsWithChildren<{}>> = ({
   children,
 }) => {
-  const session = useSession();
-  const fetch = useFetch();
   const [permission, setPermission] = useState<Permissions>([]);
-
-  const query = useQuery<Permissions, string>({
-    enabled: !!session.token,
-    retry(failureCount, error) {
-      if (error == "Invalid token.") return false;
-      return failureCount < 3;
-    },
-    queryKey: ["usePermission", session.user?.emp_id],
-    queryFn: async () => {
-      const response = await fetch("/mapping/get_user_permissions");
-      const result: ResponseWithError & { permissions: Permissions } =
-        await response.json();
-      if (![200, 201].includes(response.status))
-        return util.handleError(result);
-      setPermission((prev) =>
-        equal(prev, result.permissions) ? prev : result.permissions
-      );
-      return result.permissions;
-    },
-  });
-
-  useEffect(() => {
-    if (!session.token) setPermission([]);
-  }, [session.token]);
 
   const includes = useCallback((arr1: Permissions, arr2: any) => {
     if (Array.isArray(arr2)) return arr2.every((entry) => arr1.includes(entry));
@@ -97,14 +64,12 @@ export const PermissionProvider: React.FC<PropsWithChildren> = ({
 
   const value = useMemo(
     () => ({
-      isLoading: query.isPending,
+      isLoading: false, // since we're not fetching anymore
       isAllowed,
       getIfExists,
-      refresh: async () => {
-        await query.refetch();
-      },
+      refresh: () => {}, // no need to refresh anymore
     }),
-    [query.isPending, isAllowed, getIfExists]
+    [isAllowed, getIfExists]
   );
 
   return (
@@ -113,13 +78,5 @@ export const PermissionProvider: React.FC<PropsWithChildren> = ({
     </PermissionContext.Provider>
   );
 };
-
-function equal(arr1: string[], arr2: string[]) {
-  if (arr1.length !== arr2.length) return false;
-  arr1 = arr1.sort();
-  arr2 = arr2.sort();
-  for (let i = 0; i < arr1.length; i++) if (arr1[i] !== arr2[i]) return false;
-  return true;
-}
 
 export default usePermission;

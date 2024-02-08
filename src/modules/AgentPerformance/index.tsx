@@ -1,7 +1,6 @@
-import React, { Suspense } from "react";
 import { Outlet, RouteObject } from "react-router-dom";
 import Overview from "./pages/Overview";
-import AllLeads from "./pages/AllLeads";
+import AllCustomers from "./pages/AllCustomers";
 
 const route: RouteObject = {
   path: "/gbm-crm/agent-performance/",
@@ -14,8 +13,8 @@ const route: RouteObject = {
     },
 
     {
-      path: "all-leads",
-      element: <AllLeads />,
+      path: "all-customers",
+      element: <AllCustomers />,
     },
   ],
 };

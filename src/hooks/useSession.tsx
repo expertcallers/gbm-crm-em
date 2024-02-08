@@ -4,13 +4,14 @@ import React, {
   useContext,
   useMemo,
 } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { BASE_URL } from "../constant";
 import useLocalStorage from "./useLocalStorage";
-import util from "./util";
 
 const USER_STORAGE_KEY = "gbm_u";
 const TOKEN_STORAGE_KEY = "gbm_t";
+
+type User = {
+  emp_id: any;
+};
 
 type SessionType = {
   token: string | null;
@@ -37,30 +38,13 @@ const SessionContext = createContext<SessionType>({
 const useSession = () => useContext(SessionContext);
 
 export const SessionProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const token = useLocalStorage<SessionType["token"]>(TOKEN_STORAGE_KEY, null);
-  const user = useLocalStorage<SessionType["user"]>(USER_STORAGE_KEY, null);
+  const token = useLocalStorage<string | null>(TOKEN_STORAGE_KEY, null);
+  const user = useLocalStorage<User | null>(USER_STORAGE_KEY, null);
 
-  const setUser = (
-    callback: (user: SessionType["user"]) => SessionType["user"]
-  ) => {
+  const setUser = (callback: (user: User | null) => User | null) => {
     if (!user) return null;
     user.setStorage(callback(user.storage));
   };
-
-  useQuery<any, string>({
-    enabled: !!token.storage,
-    queryKey: ["getMyTeam", token.storage],
-    queryFn: async () => {
-      const response = await fetch(`${BASE_URL}/team/get_custom_my_team`, {
-        headers: { Authorization: `Token ${token.storage}` },
-      });
-      const result: any = await response.json();
-      if (![200, 201].includes(response.status))return util.handleError(result);
-      if (user.storage)
-        user.setStorage({ ...user.storage, my_team: result.my_team });
-      return result;
-    },
-  });
 
   const value = useMemo(
     () => ({
