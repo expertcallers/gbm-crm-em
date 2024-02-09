@@ -11,7 +11,7 @@ export const useLogout = () => {
     mutationFn: async () => {
       const response = await fetch(`/logout`);
       const result: LogoutResponse = await response.json();
-      if (![200, 201].includes(response.status))
+      if (![200, 201,500].includes(response.status))
         return util.handleError(result);
       storage.clear();
       return result;

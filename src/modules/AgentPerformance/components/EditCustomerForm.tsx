@@ -16,7 +16,7 @@ export default function EditCustomerForm(
         {
           text: "Continue",
           onClick: async () => {
-            await request.mutateAsync({formData,customer_id:props.id});
+            await request.mutateAsync(formData);
             props.close();
           },
         },
