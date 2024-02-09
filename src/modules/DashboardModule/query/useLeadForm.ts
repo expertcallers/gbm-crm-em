@@ -7,9 +7,10 @@ export const useLeadForm = () => {
 
   return useMutation<EmptyResponse, string, FormData>({
     mutationFn: async (form) => {
-      const response = await fetch(`/leads/lead`, "POST", form, true);
+      const response = await fetch(`/leads/leads`, "POST", form, true);
       const result: EmptyResponse = await response.json();
-      if (![200, 201].includes(response.status)) return util.handleError(result);
+      if (![200, 201].includes(response.status))
+        return util.handleError(result);
       return result;
     },
   });

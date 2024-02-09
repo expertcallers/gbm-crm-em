@@ -12,7 +12,7 @@ import EditCustomerForm from "../components/EditCustomerForm";
 const AllCustomers: React.FC = () => {
   const permissions = usePermission();
   const [query, setFilter] = useQueryBuilder();
-  const request = useGetAllLeads(query);
+  const request = useGetAllLeads();
   const editcustomer = useModal({ Component: EditCustomerForm });
 
   const { Datatable, ...controller } = useDatatable({

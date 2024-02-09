@@ -3,31 +3,31 @@ import useFetch from "../../../hooks/useFetch";
 import useSession from "../../../hooks/useSession";
 import util from "../../../hooks/util";
 
-export const useGetAllLeads = (query: string) => {
+export const useGetAllLeads = () => {
   const fetch = useFetch();
   const session = useSession();
 
   return {
     makeRequest,
     ...useQuery<GetAllAssetResponse, string>({
-      enabled: !!query,
+
       placeholderData: keepPreviousData,
       queryKey: [
         "AgentPerformanceModule",
         "useGetAllLeads",
         session.user?.emp_id,
-        query,
+        
       ],
-      queryFn: async () => makeRequest(fetch, query),
+      queryFn: async () => makeRequest(fetch,'' ),
     }),
   };
 };
 
 const makeRequest = async (
   fetch: ReturnType<typeof useFetch>,
-  query: string
+ query: string
 ) => {
-  const response = await fetch(`/leads/customer?${query}`);
+  const response = await fetch(`/leads/customer`);
   const result: GetAllAssetResponse = await response.json();
   if (![200, 201,304].includes(response.status))return util.handleError(result);
   return result;

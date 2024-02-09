@@ -1,9 +1,12 @@
 import { alert } from "../../../coremodules/AlertContainer";
 import FormGenerator from "../../../coremodules/FormGenerator";
+import { useGetAllLeads } from "../../AgentPerformance/query/useGetAllLeads";
 import { useLeadForm } from "../query/useLeadForm";
 
 export default function LeadForm(props: any) {
   const request = useLeadForm();
+
+  const customers = useGetAllLeads();
 
   const onSubmit = async (formData: FormData) => {
     alert({
@@ -33,15 +36,27 @@ export default function LeadForm(props: any) {
         inputs={{
           "": [
             {
-              name: "customer",
-              type: "AlphaWithSpace",
+              name: "customer_id",
+              label: "Customer",
+              type: "Select",
+              required: true,
+              options:
+                customers.data?.map((v) => ({ value: v.id, label: v.name })) ??
+                [],
             },
+            
+            // {
+            //   name:'customer_id',
+            //   label:"Email",
+            //   type:"Select",
+            //   options:customers.data?.map((v)=>({value:v.id,label:v.email}))??[]
+            // },
 
             {
               name: "status",
               type: "Select",
               options: [
-                { value: "selected", label: "Selected" },
+                { value: "conatacted", label: "contacted" },
                 { value: "rejected", label: "Rejected" },
               ],
             },

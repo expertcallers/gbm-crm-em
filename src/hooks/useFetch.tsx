@@ -7,8 +7,9 @@ import {
 } from "react";
 
 import { BASE_URL } from "../constant";
-import ApplicationError from "../pages/Core/ApplicationError";
+
 import useSession from "./useSession";
+import ApplicationError from "../pages/Core/ApplicationError";
 
 type Action = null | "reset_password" | "refresh";
 
