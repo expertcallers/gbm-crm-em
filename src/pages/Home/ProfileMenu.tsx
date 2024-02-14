@@ -1,6 +1,6 @@
-import useSession from "../../hooks/useSession";
 import { useLogout } from "../../hooks/useLogout";
 import { alert } from "../../coremodules/AlertContainer";
+
 
 export default function ProfileMenu() {
   const logout = useLogout();

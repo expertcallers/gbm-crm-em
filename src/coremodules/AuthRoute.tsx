@@ -4,7 +4,6 @@ import useSession from "../hooks/useSession";
 
 const AuthRoute: React.FC<PropsWithChildren> = ({ children }) => {
   const { token } = useSession();
-
   if (!token) {
     return <Navigate to="/login" />;
   }
