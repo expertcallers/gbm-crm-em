@@ -28,7 +28,7 @@ const AllCustomers: React.FC = () => {
   });
 
   const RowOptionMenu = useCallback(
-    (result: Datatable.RowOptionMenuProps<Asset>) => {
+    (result: Datatable.RowOptionMenuProps<Customer>) => {
       const { row } = result;
       return (
         <>

@@ -79,7 +79,7 @@ const AlertContainer: React.FC = () => {
         alert && (
           <div className="w-full">
             <p className="text-xl font-bold text-primary capitalize">{alert.title}</p>
-            <pre className="text-gray-dark mt-2 font-[system-ui] whitespace-pre-wrap">{alert.content}</pre>
+            <pre className="text-white mt-2 font-[system-ui] whitespace-pre-wrap">{alert.content}</pre>
             <div className="w-full flex justify-end flex-wrap mt-4">
               {
                 alert.buttons && (

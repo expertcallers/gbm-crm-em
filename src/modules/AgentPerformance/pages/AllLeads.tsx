@@ -6,7 +6,6 @@ import { Datatable, useDatatable } from "@jjmyers/datatable";
 import Button from "../../../coremodules/Button";
 import PageLayout from "../../../coremodules/PageLayout";
 import AutoHeight from "../../../coremodules/AutoHeight";
-import EditCustomerForm from "../components/EditCustomerForm";
 import { useGetAllLeads } from "../query/useGetAllLeads";
 import Status from "../components/Status";
 import EditLead from "../components/EditLead";

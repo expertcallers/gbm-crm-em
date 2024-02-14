@@ -3,6 +3,7 @@ import FormGenerator from "../../../coremodules/FormGenerator";
 import { UseModal } from "../../../hooks/useModal";
 import { useEditLead } from "../query/useEditLead";
 
+
 export default function EditLead(props: UseModal.ModalComponentProps<any>) {
   const request = useEditLead();
   const onSubmit = async (formData: FormData) => {
@@ -41,7 +42,6 @@ export default function EditLead(props: UseModal.ModalComponentProps<any>) {
             {
               name: "status",
               type: "Select",
-
               options: [
                 { value: "conatacted", label: "contacted" },
                 { value: "rejected", label: "Rejected" },

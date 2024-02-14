@@ -1,4 +1,4 @@
-interface Asset extends Record<string, any> {
+interface Customer extends Record<string, any> {
   id: number;
   name: string;
   contact: number;
@@ -6,7 +6,7 @@ interface Asset extends Record<string, any> {
   company_name: string;
 }
 
-type GetAllAssetResponse = Asset[];
+type GetAllCustomerResponse = Customer[];
 
 interface Lead extends Record<string, any> {
   id: number;

@@ -9,26 +9,25 @@ export const useGetAllCustomers = () => {
 
   return {
     makeRequest,
-    ...useQuery<GetAllAssetResponse, string>({
-
+    ...useQuery<GetAllCustomerResponse, string>({
       placeholderData: keepPreviousData,
       queryKey: [
         "AgentPerformanceModule",
         "useGetAllLeads",
         session.user?.emp_id,
-        
       ],
-      queryFn: async () => makeRequest(fetch,'' ),
+      queryFn: async () => makeRequest(fetch, ""),
     }),
   };
 };
 
 const makeRequest = async (
   fetch: ReturnType<typeof useFetch>,
- query: string
+  query: string
 ) => {
   const response = await fetch(`/leads/customer`);
-  const result: GetAllAssetResponse = await response.json();
-  if (![200, 201,304].includes(response.status))return util.handleError(result);
+  const result: GetAllCustomerResponse = await response.json();
+  if (![200, 201, 304].includes(response.status))
+    return util.handleError(result);
   return result;
 };
