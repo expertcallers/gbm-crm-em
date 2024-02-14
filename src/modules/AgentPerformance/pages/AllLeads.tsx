@@ -6,37 +6,49 @@ import { Datatable, useDatatable } from "@jjmyers/datatable";
 import Button from "../../../coremodules/Button";
 import PageLayout from "../../../coremodules/PageLayout";
 import AutoHeight from "../../../coremodules/AutoHeight";
-
 import EditCustomerForm from "../components/EditCustomerForm";
-import { useGetAllCustomers } from "../query/useGetAllCustomers";
+import { useGetAllLeads } from "../query/useGetAllLeads";
+import Status from "../components/Status";
+import EditLead from "../components/EditLead";
 
-const AllCustomers: React.FC = () => {
+const AllLeads: React.FC = () => {
   const permissions = usePermission();
   const [query, setFilter] = useQueryBuilder();
-  const request = useGetAllCustomers();
-  const editcustomer = useModal({ Component: EditCustomerForm });
+  const request = useGetAllLeads(query);
+  const editLead = useModal({ Component: EditLead });
 
   const { Datatable, ...controller } = useDatatable({
     data: request.data ?? [],
     onFilter: setFilter,
+    initialSortOrder: { created_at: { orderIndex: 1, sortDirection: "desc" } },
     columns: [
-      { field: "name", columnName: "Customer", filterable: false },
-      { field: "contact", columnName: "Phone Number", filterable: false },
-      { field: "email", columnName: "Email", filterable: false },
-      { field: "company_name", columnName: "Company", filterable: false },
+      { field: "customer_name", columnName: "Customer", filterable: false },
+      { field: "customer_email", columnName: "Email", filterable: false },
+      {
+        field: "customer_contact",
+        columnName: "Phone Number",
+        filterable: false,
+      },
+      {
+        field: "status",
+        columnName: "Status",
+        filterable: false,
+        renderCell: (val) => <Status status={val} />,
+      },
+      { field: "created_at", datatype: "datetime" },
     ],
   });
 
   const RowOptionMenu = useCallback(
-    (result: Datatable.RowOptionMenuProps<Asset>) => {
+    (result: Datatable.RowOptionMenuProps<Lead>) => {
       const { row } = result;
       return (
         <>
           <Button
-            text="Edit customer"
+            text="Edit Lead"
             alignLeft
             borderLess
-            onClick={() => editcustomer.show(row)}
+            onClick={() => editLead.show(row)}
             theme="white"
           />
         </>
@@ -51,7 +63,7 @@ const AllCustomers: React.FC = () => {
         <>
           <ClearFilter controller={controller} />
           <QueryExport
-            fileName="All customers"
+            fileName="All Leads"
             query={query}
             count={request.data?.length}
             fetchData={request.makeRequest}
@@ -76,9 +88,9 @@ const AllCustomers: React.FC = () => {
           {...controller}
         />
       </AutoHeight>
-      {editcustomer.Modal}
+      {editLead.Modal}
     </PageLayout>
   );
 };
 
-export default AllCustomers;
+export default AllLeads;

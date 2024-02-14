@@ -8,6 +8,18 @@ interface Asset extends Record<string, any> {
 
 type GetAllAssetResponse = Asset[];
 
+interface Lead extends Record<string, any> {
+  id: number;
+  customer_name: string;
+  customer_email: string;
+  customer_contact: number;
+  created_at: string;
+  status: string;
+  customer: number;
+}
+
+type getAllLeadResponse = Lead[];
+
 type SearchForEmployeeResponse = {
   error?: string | undefined;
   result: [any, string][];

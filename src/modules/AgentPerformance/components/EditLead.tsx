@@ -1,17 +1,14 @@
 import { alert } from "../../../coremodules/AlertContainer";
 import FormGenerator from "../../../coremodules/FormGenerator";
-import { useGetAllCustomers } from "../../AgentPerformance/query/useGetAllCustomers";
+import { UseModal } from "../../../hooks/useModal";
+import { useEditLead } from "../query/useEditLead";
 
-
-import { useLeadForm } from "../query/useLeadForm";
-
-export default function LeadForm(props: any) {
-  const request = useLeadForm();
-  const customers = useGetAllCustomers();
+export default function EditLead(props: UseModal.ModalComponentProps<any>) {
+  const request = useEditLead();
   const onSubmit = async (formData: FormData) => {
     alert({
-      title: "Create Lead",
-      content: "Are you sure you want to create a lead?",
+      title: "Edit Lead",
+      content: "Are you sure you want to edit Lead?",
       buttons: [
         { text: "Cancel" },
         {
@@ -31,21 +28,20 @@ export default function LeadForm(props: any) {
         onSubmit={onSubmit}
         isSubmitting={request.isPending}
         submitError={request.error}
-        title="Create Lead"
+        title="Edit Customer"
         noHeaders
         inputs={{
           "": [
             {
-              name: "customer_id",
-              label: "Customer",
-              type: "Select",
-              options:
-                customers.data?.map((v) => ({ value: v.id, label: v.name })) ??
-                [],
+              name: "customer_name",
+              type: "AlphaWithSpace",
+              defaultValue: props.customer_name,
+              readOnly: true,
             },
             {
               name: "status",
               type: "Select",
+
               options: [
                 { value: "conatacted", label: "contacted" },
                 { value: "rejected", label: "Rejected" },

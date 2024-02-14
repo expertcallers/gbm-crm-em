@@ -10,7 +10,6 @@ import {
 import { MenuButton } from "../../coremodules/MenuButton";
 import usePermission, { Permission } from "../../hooks/usePermission";
 
-
 interface MenuProps {
   closeMenu?: () => void;
 }
@@ -35,7 +34,6 @@ function Menu(props: MenuProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const permissions = usePermission();
- 
 
   const menuOptions = useMemo<MenuOption[]>(
     () => [
@@ -57,6 +55,13 @@ function Menu(props: MenuProps) {
             permissions: [],
             anyOne: true,
             route: "/gbm-crm/agent-performance/all-customers",
+            exact: true,
+          },
+          {
+            title: "All Leads",
+            permissions: [],
+            anyOne: true,
+            route: "/gbm-crm/agent-performance/all-leads",
             exact: true,
           },
         ],
